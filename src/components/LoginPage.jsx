@@ -41,7 +41,7 @@ const LoginPage = () => {
 
         try {
             // Replace with your actual API endpoint
-            const response = await axios.post('http://localhost:5001/api/login', {
+            const response = await axios.post('http://13.233.156.222/api/login', {
                 email,
                 password
             })
