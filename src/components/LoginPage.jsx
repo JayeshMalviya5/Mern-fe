@@ -2,15 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../lib/axiosClient";
 
-
-const getStoredUsers = () => {
-  try {
-    return JSON.parse(localStorage.getItem("users") || "[]");
-  } catch {
-    return [];
-  }
-};
-
 const highlights = [
   "Instant booking confirmation",
   "Verified vehicle partners",
