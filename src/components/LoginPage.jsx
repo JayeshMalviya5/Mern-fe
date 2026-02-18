@@ -31,7 +31,7 @@ const LoginPage = ({ mode = "login" }) => {
     setFormData((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
-  const validate = () => {
+  const validate = async () => {
     const { name, email, password, confirmPassword, role } = formData;
         setLoading(true)
 
