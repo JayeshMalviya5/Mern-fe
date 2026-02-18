@@ -9,12 +9,6 @@ const getStoredUsers = () => {
   }
 };
 
-const highlights = [
-  "Instant booking confirmation",
-  "Verified vehicle partners",
-  "Affordable daily rentals",
-];
-
 const LoginPage = ({ mode = "login" }) => {
   const isSignup = mode === "signup";
   const [formData, setFormData] = useState({
@@ -30,6 +24,29 @@ const LoginPage = ({ mode = "login" }) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/");
+    }
+  }, [navigate]);
+
+  const updateField = (field) => (e) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+  };
+
+  const validate = () => {
+    const { name, email, password, confirmPassword } = formData;
+    if (!email || !password || (isSignup && !name)) {
+      return "Please fill all required fields.";
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return "Please enter a valid email address.";
+    }
+
+    if (password.length < 6) {
+      return "Password must be at least 6 characters long.";
+    }
+
+    if (isSignup && password !== confirmPassword) {
+      return "Password and confirm password must match.";
     }
   }, [navigate]);
 
