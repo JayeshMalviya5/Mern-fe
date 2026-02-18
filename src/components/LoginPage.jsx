@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axiosClient from "../lib/axiosClient";
+
 
 const getStoredUsers = () => {
   try {
@@ -59,7 +61,25 @@ const LoginPage = ({ mode = "login" }) => {
     return "";
   };
 
-  const handleSubmit = (e) => {
+  const submitAuthRequest = async () => {
+    const payload = isSignup
+      ? {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }
+      : {
+          email: formData.email,
+          password: formData.password,
+        };
+
+    const endpoint = isSignup ? "/register" : "/login";
+
+    const response = await axiosClient.post(endpoint, payload);
+    return response.data;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -71,33 +91,32 @@ const LoginPage = ({ mode = "login" }) => {
 
     setLoading(true);
 
-    setTimeout(() => {
-      const users = getStoredUsers();
-      const { name, email, password } = formData;
-      const existingUser = users.find((u) => u.email === email);
+    try {
+      const data = await submitAuthRequest();
+      const token = data.token || data.accessToken;
+      const user = data.user || {
+        name: formData.name,
+        email: formData.email,
+      };
 
-      if (isSignup) {
-        if (existingUser) {
-          setError("User already exists. Please login instead.");
-          setLoading(false);
-          return;
-        }
-
-        users.push({ name, email, password });
-        localStorage.setItem("users", JSON.stringify(users));
-      } else if (!existingUser || existingUser.password !== password) {
-        setError("Invalid email or password.");
-        setLoading(false);
+      if (!token) {
+        setError("Login failed: token not returned by server.");
         return;
       }
 
-      const currentUser = isSignup ? { name, email } : { name: existingUser.name, email };
-      localStorage.setItem("token", `auth-${Date.now()}`);
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-      setLoading(false);
+      localStorage.setItem("token", token);
+      localStorage.setItem("currentUser", JSON.stringify(user));
       navigate("/");
-    }, 400);
+    } catch (err) {
+      const message =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        err.message ||
+        "Authentication failed. Please try again.";
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
