@@ -15,6 +15,7 @@ const LoginPage = ({ mode = "login" }) => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "USER",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,9 +32,9 @@ const LoginPage = ({ mode = "login" }) => {
   };
 
   const validate = () => {
-    const { name, email, password, confirmPassword } = formData;
+    const { name, email, password, confirmPassword, role } = formData;
 
-    if (!email || !password || (isSignup && !name)) {
+    if (!email || !password || (isSignup && (!name || !role))) {
       return "Please fill all required fields.";
     }
 
@@ -49,6 +50,10 @@ const LoginPage = ({ mode = "login" }) => {
       return "Password and confirm password must match.";
     }
 
+    if (isSignup && !["ADMIN", "USER"].includes(role)) {
+      return "Please select a valid role.";
+    }
+
     return "";
   };
 
@@ -58,6 +63,7 @@ const LoginPage = ({ mode = "login" }) => {
           name: formData.name,
           email: formData.email,
           password: formData.password,
+          role: formData.role,
         }
       : {
           email: formData.email,
@@ -88,6 +94,7 @@ const LoginPage = ({ mode = "login" }) => {
       const user = data.user || {
         name: formData.name,
         email: formData.email,
+        role: formData.role,
       };
 
       if (!token) {
@@ -178,6 +185,17 @@ const LoginPage = ({ mode = "login" }) => {
                 onChange={updateField("password")}
                 className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+
+              {isSignup && (
+                <select
+                  value={formData.role}
+                  onChange={updateField("role")}
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="USER">USER</option>
+                  <option value="ADMIN">ADMIN</option>
+                </select>
+              )}
 
               {isSignup && (
                 <input
