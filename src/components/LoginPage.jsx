@@ -187,6 +187,16 @@ const LoginPage = ({ mode = "login" }) => {
               />
 
               {isSignup && (
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={formData.confirmPassword}
+                  onChange={updateField("confirmPassword")}
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              )}
+
+              {isSignup && (
                 <select
                   value={formData.role}
                   onChange={updateField("role")}
@@ -195,16 +205,6 @@ const LoginPage = ({ mode = "login" }) => {
                   <option value="USER">USER</option>
                   <option value="ADMIN">ADMIN</option>
                 </select>
-              )}
-
-              {isSignup && (
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  value={formData.confirmPassword}
-                  onChange={updateField("confirmPassword")}
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
               )}
 
               <button
