@@ -1,92 +1,159 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
+const getStoredUsers = () => {
+  try {
+    return JSON.parse(localStorage.getItem("users") || "[]");
+  } catch {
+    return [];
+  }
+};
 
-    useEffect(() => {
-        // Check if token already exists
-        const token = localStorage.getItem('token')
-        if (token) {
-            navigate('/')
-        }
-    }, [navigate])
+const LoginPage = ({ mode = "login" }) => {
+  const isSignup = mode === "signup";
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault()
-        setError('')
-        
-        // Validate inputs
-        if (!email || !password) {
-            setError('Email and password are required')
-            return
-        }
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, [navigate]);
 
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            setError('Please enter a valid email')
-            return
-        }
+  const updateField = (field) => (e) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+  };
 
-        if (password.length < 6) {
-            setError('Password must be at least 6 characters')
-            return
-        }
-
-        setLoading(true)
-
-        try {
-            // Replace with your actual API endpoint
-            const response = await axios.post('http://localhost:5001/api/login', {
-                email,
-                password
-            })
-
-            if (response.data.token) {
-                localStorage.setItem('token', response.data.token)
-            }
-            // Redirect to landing page
-            navigate('/')
-        } catch (err) {
-            setError(err.message || 'An error occurred. Please try again.')
-            console.error('Login error:', err)
-        } finally {
-            setLoading(false)
-        }
+  const validate = () => {
+    const { name, email, password, confirmPassword } = formData;
+    if (!email || !password || (isSignup && !name)) {
+      return "Please fill all required fields.";
     }
 
-    return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4">{error}</div>}
-        <form onSubmit={handleLogin}>
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return "Please enter a valid email address.";
+    }
+
+    if (password.length < 6) {
+      return "Password must be at least 6 characters long.";
+    }
+
+    if (isSignup && password !== confirmPassword) {
+      return "Password and confirm password must match.";
+    }
+
+    return "";
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+
+    const validationError = validate();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setLoading(true);
+
+    setTimeout(() => {
+      const users = getStoredUsers();
+      const { name, email, password } = formData;
+      const existingUser = users.find((u) => u.email === email);
+
+      if (isSignup) {
+        if (existingUser) {
+          setError("User already exists. Please login instead.");
+          setLoading(false);
+          return;
+        }
+
+        users.push({ name, email, password });
+        localStorage.setItem("users", JSON.stringify(users));
+      } else if (!existingUser || existingUser.password !== password) {
+        setError("Invalid email or password.");
+        setLoading(false);
+        return;
+      }
+
+      const currentUser = isSignup ? { name, email } : { name: existingUser.name, email };
+      localStorage.setItem("token", `auth-${Date.now()}`);
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+      setLoading(false);
+      navigate("/");
+    }, 400);
+  };
+
+  return (
+    <div className="min-h-[calc(100vh-72px)] flex items-center justify-center bg-gray-100 px-4">
+      <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-2 text-center">
+          {isSignup ? "Create account" : "Welcome back"}
+        </h2>
+        <p className="text-center text-gray-600 mb-6">
+          {isSignup ? "Sign up to start renting vehicles." : "Login to continue to your dashboard."}
+        </p>
+
+        {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">{error}</div>}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {isSignup && (
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={updateField("name")}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+            />
+          )}
           <input
             type="email"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full mb-4 px-4 py-2 border rounded focus:outline-none focus:border-blue-600"
+            value={formData.email}
+            onChange={updateField("email")}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
           />
           <input
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full mb-4 px-4 py-2 border rounded focus:outline-none focus:border-blue-600"
+            value={formData.password}
+            onChange={updateField("password")}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
           />
-          <button 
-            type="submit" 
+          {isSignup && (
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={updateField("confirmPassword")}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+            />
+          )}
+
+          <button
+            type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:bg-gray-400"
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? "Please wait..." : isSignup ? "Sign Up" : "Login"}
           </button>
         </form>
+
+        <p className="text-sm text-center mt-5 text-gray-600">
+          {isSignup ? "Already have an account?" : "New user?"}{" "}
+          <Link to={isSignup ? "/login" : "/signup"} className="text-blue-600 font-semibold">
+            {isSignup ? "Login" : "Create one"}
+          </Link>
+        </p>
       </div>
     </div>
   );
