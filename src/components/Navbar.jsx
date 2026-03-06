@@ -1,4 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Car } from "lucide-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,8 +13,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-900 text-white px-6 py-4 flex justify-between items-center h-[72px]">
-      <Link to={isLoggedIn ? "/" : "/login"} className="text-xl font-bold">
-        Rent Your Ride
+      <Link to={isLoggedIn ? "/" : "/login"} className="flex items-center gap-2 group">
+        <div className="bg-cyan-500/20 p-2 rounded-lg group-hover:bg-cyan-500/30 transition-colors">
+          <Car className="w-6 h-6 text-cyan-400" />
+        </div>
+        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+          RentYourRide
+        </span>
       </Link>
 
       {isLoggedIn ? (
@@ -30,12 +36,7 @@ const Navbar = () => {
             Logout
           </button>
         </div>
-      ) : (
-        <div className="flex gap-3 text-sm">
-          <NavLink to="/login" className="hover:text-gray-300">Login</NavLink>
-          <NavLink to="/signup" className="hover:text-gray-300">Signup</NavLink>
-        </div>
-      )}
+      ) : null}
     </nav>
   );
 };
