@@ -11,6 +11,8 @@ import {
   Loader2, 
   AlertCircle 
 } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/authSlice";
 import axiosClient from "../lib/axiosClient";
 
 const highlights = [
@@ -31,6 +33,7 @@ const LoginPage = ({ mode = "login" }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -103,8 +106,17 @@ const LoginPage = ({ mode = "login" }) => {
 
     try {
       const data = await submitAuthRequest();
-      const token = data.token || data.accessToken;
-      const user = data.user || {
+
+      if (isSignup) {
+        // Registration successful. Since there is no token returned,
+        // we redirect the user to the login page to authenticate.
+        navigate("/login");
+        return;
+      }
+
+      // Safely extract token handling both `data.data.token` and `data.token`
+      const token = data?.data?.token || data?.data?.accessToken || data?.token || data?.accessToken;
+      const user = data?.data?.user || data?.user || {
         name: formData.name,
         email: formData.email,
         role: formData.role,
@@ -115,8 +127,13 @@ const LoginPage = ({ mode = "login" }) => {
         return;
       }
 
+      // Save to localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("currentUser", JSON.stringify(user));
+
+      // Dispatch to Redux store
+      dispatch(setCredentials({ user, token }));
+
       navigate("/");
     } catch (err) {
       const message =
