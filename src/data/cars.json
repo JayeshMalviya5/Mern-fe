@@ -1,0 +1,116 @@
+[
+    {
+        "id": "car-1",
+        "name": "Mahindra Thar",
+        "brand": "Mahindra",
+        "image": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 399,
+        "pricePerDay": 3499,
+        "fuelType": "Diesel",
+        "transmission": "Manual",
+        "seats": 4,
+        "rating": 4.9,
+        "reviews": 312,
+        "availability": "Available now",
+        "features": [
+            "4x4 Drive",
+            "Hard Top",
+            "Unlimited km"
+        ]
+    },
+    {
+        "id": "car-2",
+        "name": "Hyundai Creta",
+        "brand": "Hyundai",
+        "image": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 299,
+        "pricePerDay": 2599,
+        "fuelType": "Petrol",
+        "transmission": "Automatic",
+        "seats": 5,
+        "rating": 4.8,
+        "reviews": 425,
+        "availability": "2 left",
+        "features": [
+            "Panoramic Sunroof",
+            "Ventilated Seats",
+            "GPS Included"
+        ]
+    },
+    {
+        "id": "car-3",
+        "name": "Tata Safari",
+        "brand": "Tata",
+        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 449,
+        "pricePerDay": 3999,
+        "fuelType": "Diesel",
+        "transmission": "Automatic",
+        "seats": 7,
+        "rating": 4.7,
+        "reviews": 189,
+        "availability": "Available now",
+        "features": [
+            "Captain Seats",
+            "ADAS L2",
+            "Free Cancellation"
+        ]
+    },
+    {
+        "id": "car-4",
+        "name": "Maruti Swift",
+        "brand": "Maruti Suzuki",
+        "image": "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 149,
+        "pricePerDay": 1299,
+        "fuelType": "Petrol",
+        "transmission": "Manual",
+        "seats": 5,
+        "rating": 4.5,
+        "reviews": 840,
+        "availability": "5+ left",
+        "features": [
+            "High Mileage",
+            "Easy Parking",
+            "AC Setup"
+        ]
+    },
+    {
+        "id": "car-5",
+        "name": "Honda City",
+        "brand": "Honda",
+        "image": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 249,
+        "pricePerDay": 2199,
+        "fuelType": "Petrol",
+        "transmission": "Automatic",
+        "seats": 5,
+        "rating": 4.8,
+        "reviews": 532,
+        "availability": "1 left",
+        "features": [
+            "Premium Sedan",
+            "Spacious Trunk",
+            "Cruise Control"
+        ]
+    },
+    {
+        "id": "car-6",
+        "name": "Toyota Innova Crysta",
+        "brand": "Toyota",
+        "image": "https://images.unsplash.com/photo-1605810230434-783b9e4a8ea6?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 499,
+        "pricePerDay": 4499,
+        "fuelType": "Diesel",
+        "transmission": "Manual",
+        "seats": 7,
+        "rating": 4.9,
+        "reviews": 921,
+        "availability": "3 left",
+        "features": [
+            "Family Trip",
+            "Highway Master",
+            "Chauffeur Friendly"
+        ]
+    }
+]

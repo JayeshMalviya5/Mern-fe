@@ -8,7 +8,6 @@ body,
 }
 
 body {
-  overflow: hidden;
   font-family: Inter, system-ui, -apple-system, sans-serif;
   background: #f8fafc;
 }

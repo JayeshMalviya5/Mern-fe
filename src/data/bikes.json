@@ -1,0 +1,116 @@
+[
+    {
+        "id": "bike-1",
+        "name": "Royal Enfield Classic 350",
+        "brand": "Royal Enfield",
+        "image": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 99,
+        "pricePerDay": 899,
+        "fuelType": "Petrol",
+        "transmission": "Manual",
+        "cc": 350,
+        "rating": 4.8,
+        "reviews": 124,
+        "availability": "Available now",
+        "features": [
+            "Helmet Included",
+            "100 km/day",
+            "Roadside Assistance"
+        ]
+    },
+    {
+        "id": "bike-2",
+        "name": "Bajaj Pulsar NS160",
+        "brand": "Bajaj",
+        "image": "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 69,
+        "pricePerDay": 599,
+        "fuelType": "Petrol",
+        "transmission": "Manual",
+        "cc": 160,
+        "rating": 4.5,
+        "reviews": 89,
+        "availability": "3 left",
+        "features": [
+            "Mobile Holder",
+            "80 km/day",
+            "Insurance Included"
+        ]
+    },
+    {
+        "id": "bike-3",
+        "name": "TVS Apache RTR 200",
+        "brand": "TVS",
+        "image": "https://images.unsplash.com/photo-1473348123289-53b05fe1cf25?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 79,
+        "pricePerDay": 699,
+        "fuelType": "Petrol",
+        "transmission": "Manual",
+        "cc": 200,
+        "rating": 4.6,
+        "reviews": 112,
+        "availability": "5 left",
+        "features": [
+            "ABS",
+            "90 km/day",
+            "Free Cancellation"
+        ]
+    },
+    {
+        "id": "bike-4",
+        "name": "KTM Duke 390",
+        "brand": "KTM",
+        "image": "https://images.unsplash.com/photo-1568772585407-9361f9bfce67?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 149,
+        "pricePerDay": 1299,
+        "fuelType": "Petrol",
+        "transmission": "Manual",
+        "cc": 373,
+        "rating": 4.9,
+        "reviews": 210,
+        "availability": "Available now",
+        "features": [
+            "Performance Tires",
+            "120 km/day",
+            "Premium Insurance"
+        ]
+    },
+    {
+        "id": "bike-5",
+        "name": "Honda Activa 6G",
+        "brand": "Honda",
+        "image": "https://images.unsplash.com/photo-1590487317112-6aedadd6f6fb?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 49,
+        "pricePerDay": 399,
+        "fuelType": "Petrol",
+        "transmission": "Automatic",
+        "cc": 110,
+        "rating": 4.4,
+        "reviews": 345,
+        "availability": "10+ left",
+        "features": [
+            "Storage Space",
+            "60 km/day",
+            "Easy Handling"
+        ]
+    },
+    {
+        "id": "bike-6",
+        "name": "Yamaha R15 V4",
+        "brand": "Yamaha",
+        "image": "https://images.unsplash.com/photo-1622185135505-2d795003994a?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 129,
+        "pricePerDay": 1099,
+        "fuelType": "Petrol",
+        "transmission": "Manual",
+        "cc": 155,
+        "rating": 4.7,
+        "reviews": 156,
+        "availability": "1 left",
+        "features": [
+            "Sport Fairing",
+            "100 km/day",
+            "Quick Shifter"
+        ]
+    }
+]

@@ -49,13 +49,7 @@ const Navbar = () => {
 
       {isAuthenticated && user && (
         <div className="flex items-center gap-8">
-          {/* Navigation Links */}
-          <div className="hidden md:flex gap-6 text-sm font-medium text-slate-300">
-            <NavLink to="/bikes" className={({ isActive }) => isActive ? "text-cyan-400" : "hover:text-white transition-colors"}>Bikes</NavLink>
-            <NavLink to="/cars" className={({ isActive }) => isActive ? "text-cyan-400" : "hover:text-white transition-colors"}>Cars</NavLink>
-            <NavLink to="/e-rickshaw" className={({ isActive }) => isActive ? "text-cyan-400" : "hover:text-white transition-colors"}>E-Rickshaw</NavLink>
-          </div>
-
+          {/* Navigation Links removed. Categories now accessible via Landing Page */}
           {/* User Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button

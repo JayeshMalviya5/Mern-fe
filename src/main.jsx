@@ -10,7 +10,15 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Toaster position="top-right" richColors closeButton />
+        <Toaster 
+          position="top-right" 
+          richColors 
+          closeButton 
+          toastOptions={{
+            style: { zIndex: 9999 },
+            className: "z-[9999]"
+          }}
+        />
         <App />
       </BrowserRouter>
     </Provider>

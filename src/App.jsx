@@ -11,7 +11,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 export default function App() {
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <Routes>
         <Route path="/login" element={<LoginPage mode="login" />} />

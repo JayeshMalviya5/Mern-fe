@@ -1,0 +1,78 @@
+[
+    {
+        "id": "rickshaw-1",
+        "name": "Mahindra Treo",
+        "brand": "Mahindra",
+        "image": "https://images.unsplash.com/photo-1593952445831-2917d0e80674?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 49,
+        "pricePerDay": 499,
+        "batteryRange": "130 km",
+        "chargeTime": "3.5 hrs",
+        "seats": 4,
+        "rating": 4.6,
+        "reviews": 112,
+        "availability": "Available now",
+        "features": [
+            "Regenerative Braking",
+            "Zero Emissions",
+            "Weather Canopy"
+        ]
+    },
+    {
+        "id": "rickshaw-2",
+        "name": "Piaggio Ape E-City",
+        "brand": "Piaggio",
+        "image": "https://images.unsplash.com/photo-1627684334333-e59714ab01a8?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 45,
+        "pricePerDay": 459,
+        "batteryRange": "110 km",
+        "chargeTime": "4 hrs",
+        "seats": 3,
+        "rating": 4.4,
+        "reviews": 84,
+        "availability": "4 left",
+        "features": [
+            "Swappable Battery",
+            "Compact Frame",
+            "Hill Assist"
+        ]
+    },
+    {
+        "id": "rickshaw-3",
+        "name": "Kinetic Safar Smart",
+        "brand": "Kinetic Green",
+        "image": "https://images.unsplash.com/photo-1634560706437-db5a16d7a460?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 39,
+        "pricePerDay": 399,
+        "batteryRange": "90 km",
+        "chargeTime": "4.5 hrs",
+        "seats": 4,
+        "rating": 4.2,
+        "reviews": 65,
+        "availability": "Available now",
+        "features": [
+            "All-Steel Body",
+            "Dual Headlights",
+            "Comfort Suspension"
+        ]
+    },
+    {
+        "id": "rickshaw-4",
+        "name": "YC Electric Yatri",
+        "brand": "YC Electric",
+        "image": "https://images.unsplash.com/photo-1593952445831-2917d0e80674?auto=format&fit=crop&q=80&w=800",
+        "pricePerHour": 55,
+        "pricePerDay": 549,
+        "batteryRange": "150 km",
+        "chargeTime": "3 hrs",
+        "seats": 5,
+        "rating": 4.8,
+        "reviews": 210,
+        "availability": "1 left",
+        "features": [
+            "Fast Charging",
+            "Extra Legroom",
+            "Digital Display"
+        ]
+    }
+]
